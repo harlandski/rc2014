@@ -4,7 +4,7 @@ BASIC and Assemby Programs for the RC2014
 - This is a Fibonacci sequence for the Orton 3C RC2014.
 - It requires the I/O module
 - Obviously, the output doesn't make much sense above 255, but is a nice Blinkenlights routine
-- I originally wrote this code for a Soviet 8080 Microtrainer - see my [video](https://youtu.be/7Rhykm3Gkuc?si=Io27PC4c3WNNVdF-) which includes it running very similar code.
+- I originally wrote this code for a Soviet 8080 Microtrainer - see my [video](https://youtu.be/7Rhykm3Gkuc?si=Io27PC4c3WNNVdF-).
 ## Giggle
 - This is a faithful clone of the Boggle game. You need to apply the rules manually.
 - https://instructions.hasbro.com/api/download/04601_en-us_boggle.pdf
