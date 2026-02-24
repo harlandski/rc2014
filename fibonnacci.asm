@@ -1,6 +1,6 @@
         org 0
 
-; allow for bad exit from rum
+; allow for bad exit from RUN
         nop
 ; Setup initial register values
 

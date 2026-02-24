@@ -1,12 +1,12 @@
 # file opened: fibonnacci.asm
  1    0000                      org 0
  2    0000
- 3    0000              ; allow for bad exit from rum
+ 3    0000              ; allow for bad exit from RUN
  4    0000 00                   nop
  5    0001              ; Setup initial register values
  6    0001
  7    0001 06 00                ld b,0
- 8    0003 0E 00                ld c,0
+ 8    0003 0E 01                ld c,1
  9    0005
 10    0005              ; Do Fibonacci calculations
 11    0005 AF           LOOP:   xor a
