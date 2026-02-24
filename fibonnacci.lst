@@ -1,0 +1,29 @@
+# file opened: fibonnacci.asm
+ 1    0000                      org 0
+ 2    0000
+ 3    0000              ; allow for bad exit from rum
+ 4    0000 00                   nop
+ 5    0001              ; Setup initial register values
+ 6    0001
+ 7    0001 06 00                ld b,0
+ 8    0003 0E 00                ld c,0
+ 9    0005
+10    0005              ; Do Fibonacci calculations
+11    0005 AF           LOOP:   xor a
+12    0006 80                   add b
+13    0007 81                   add c
+14    0008 41                   ld b,c
+15    0009 4F                   ld c,a
+16    000A
+17    000A              ; Setup delay registers
+18    000A 16 00                ld d,0
+19    000C 1E 00                ld e,0
+20    000E
+21    000E D3 00        DELAY:  out ($00),a
+22    0010 1D                   dec e
+23    0011 20 FB                jr nz, DELAY
+24    0013 15                   dec d
+25    0014 20 F8                jr nz, DELAY
+26    0016 C3 05 00             jp LOOP
+27    0019
+# file closed: fibonnacci.asm
