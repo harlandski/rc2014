@@ -1,0 +1,32 @@
+# file opened: d6-fast-rnd.asm
+ 1    0000              ; d6 based on z80.info fast rnd
+ 2    0000
+ 3    0000                      org 0 ; to avoid corruption after non-halt exit
+ 4    0000
+ 5    0000 00                   nop
+ 6    0001
+ 7    0001 3A 1B 00     START:  ld a, (SEED)
+ 8    0004 47                   ld b,a
+ 9    0005
+10    0005 0F                   rrca ; multiply by 32
+11    0006 0F                   rrca
+12    0007 0F                   rrca
+13    0008 EE 1F                xor $1f
+14    000A
+15    000A 80                   add a,b
+16    000B DE FF                sbc a,255; carry
+17    000D
+18    000D 32 1B 00             ld (SEED), a; save number as next seed
+19    0010
+20    0010              ; Convert to range 1-6
+21    0010 E6 07                and %00000111   ; keep lowest 3 bits (0-7)
+22    0012 3C                   inc a           ; now 1-8
+23    0013 FE 07                cp 7            ; if result is >=7
+24    0015 30 EA                jr nc,START     ; reject and start again
+25    0017
+26    0017 D3 00        VIEW:   out ($00),a
+27    0019 18 FC                jr VIEW
+28    001B
+29    001B 01           SEED:   db $01          ; must be non-zero
+30    001C
+# file closed: d6-fast-rnd.asm
