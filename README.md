@@ -5,9 +5,11 @@ Assembly and BASIC Programs for the RC2014 family
 ### Dice
 - allows you to roll an arbitrary "die" from d2-d255 by setting the input switches
 - based on Fast RND, and an extension of D6 Fast RND
+- all of the random routines require you to set your own starting random seed, which must be > 0
 ### D6 Fast RND
 - produces a result in the range 1-6, thus simulating a regular die
 - based on Fast RND below
+- all of the random routines require you to set your own starting random seed, which must be > 0
 ### Fast RND
 - This is directly copied from [Z80 info](https://www.z80.info/pseudo-random.txt), with only the output routine added for the Orton 3C
 - To quote the original:
@@ -17,6 +19,7 @@ Assembly and BASIC Programs for the RC2014 family
 > R -> (33*R) mod 257
 > S = R - 1
 > an 8-bit unsigned integer
+- all of the random routines require you to set your own starting random seed, which must be > 0
 ### Fibonacci
 - This is a Fibonacci sequence for the Orton 3C RC2014.
 - It requires the I/O module
