@@ -2,9 +2,12 @@
 Assembly and BASIC Programs for the RC2014 family
 
 ## Orton 3C RC2014
+### Dice
+- allows you to roll an arbitrary "die" from d2-d255 by setting the input switches
+- based on Fast RND, and an extension of D6 Fast RND
 ### D6 Fast RND
-- Based on Fast RND below
 - produces a result in the range 1-6, thus simulating a regular die
+- based on Fast RND below
 ### Fast RND
 - This is directly copied from [Z80 info](https://www.z80.info/pseudo-random.txt), with only the output routine added for the Orton 3C
 - To quote the original:
