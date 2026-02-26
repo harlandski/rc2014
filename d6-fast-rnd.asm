@@ -1,4 +1,5 @@
 ; d6 based on z80.info fast rnd
+; requires the input-output unit
 
         org 0 ; to avoid corruption after non-halt exit
 
