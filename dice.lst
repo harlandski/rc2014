@@ -1,0 +1,75 @@
+# file opened: dice.asm
+ 1    0000              ; roll any die
+ 2    0000              ; random routine taken from z80.info fast rnd
+ 3    0000              ; requires input-output module
+ 4    0000              ; Note: switches should be set before the program runs
+ 5    0000              ; Note: once a program is running, just flicking ⟳ will re-run it
+ 6    0000
+ 7    0000                      org 0
+ 8    0000
+ 9    0000 00                   nop ; to avoid corruption after non-halt exit
+10    0001
+11    0001 3A 5D 00     RANDOM: ld a, (SEED)
+12    0004 47                   ld b,a
+13    0005
+14    0005 0F                   rrca
+15    0006 0F                   rrca
+16    0007 0F                   rrca
+17    0008 EE 1F                xor $1f
+18    000A
+19    000A 80                   add a,b
+20    000B DE FF                sbc a,255; carry
+21    000D
+22    000D 32 5D 00             ld (SEED), a; save number as next seed, and also for use in CONV
+23    0010
+24    0010              ; read the input, and deal with edge cases of $00 and $FF
+25    0010 DB 00        INPUT:  in A,($00)
+26    0012 FE 00                cp $00
+27    0014 28 43                jr z, OUTPUT
+28    0016 FE FF                cp $FF
+29    0018 28 04                jr z, IS255
+30    001A 47                   ld b,a ; b is the maximum we want
+31    001B 04                   inc b; but we need to test one more than max
+32    001C 18 01                jr TESTS
+33    001E 47           IS255:  ld b,a; unless a is 255, then we'll leave it as that
+34    001F
+35    001F              ; test bits and set mask. Only the highest mask remains
+36    001F 0E 00        TESTS:  ld c,0; reset mask
+37    0021 CB 47        TEST0:  bit 0,a ; is bit 0 set?
+38    0023 28 02                jr z, TEST1
+39    0025 0E 01                ld c,%00000001; mask
+40    0027 CB 4F        TEST1:  bit 1,a; is bit 1 set?
+41    0029 28 02                jr z, TEST2
+42    002B 0E 03                ld c,%00000011
+43    002D CB 57        TEST2:  bit 2,a; is bit 2 set?
+44    002F 28 02                jr z, TEST3
+45    0031 0E 07                ld c,%00000111
+46    0033 CB 5F        TEST3:  bit 3,a ; etc
+47    0035 28 02                jr z, TEST4
+48    0037 0E 0F                ld c,%00001111
+49    0039 CB 67        TEST4:  bit 4,a
+50    003B 28 02                jr z, TEST5
+51    003D 0E 1F                ld c,%00011111
+52    003F CB 6F        TEST5:  bit 5,a
+53    0041 28 02                jr z, TEST6
+54    0043 0E 3F                ld c,%00111111
+55    0045 CB 77        TEST6:  bit 6,a
+56    0047 28 02                jr z, TEST7
+57    0049 0E 7F                ld c,%01111111
+58    004B CB 7F        TEST7:  bit 7,a
+59    004D 28 02                jr z, CONV
+60    004F 0E FF                ld c,%11111111
+61    0051
+62    0051              ; Convert to range 1-max, and truncate numbers higher than desired
+63    0051 3A 5D 00     CONV:   ld a, (SEED) ; bring our random number back
+64    0054 A1                   and c   ; keep lowest bits as per mask
+65    0055 3C                   inc a   ; make range start at 1
+66    0056 B8                   cp b    ; if result is > max
+67    0057 30 A8                jr nc,RANDOM     ; reject and start again
+68    0059
+69    0059 D3 00        OUTPUT: out ($00),a ; infinite loop
+70    005B 18 FC                jr OUTPUT
+71    005D
+72    005D 01           SEED:   db $01          ; must be non-zero
+73    005E
+# file closed: dice.asm
