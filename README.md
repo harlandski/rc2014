@@ -4,6 +4,7 @@ Assembly and BASIC Programs for the RC2014 family
 ## Orton 3C RC2014
 ### Dice
 - allows you to roll an arbitrary "die" from d2-d255 by setting the input switches
+  - currently there is a bug that if at any point the input switches are all set to 0 then it crashes
 - based on Fast RND, and an extension of D6 Fast RND
 - all of the random routines require you to set your own starting random seed, which must be > 0
 ### D6 Fast RND
