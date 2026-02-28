@@ -1,0 +1,25 @@
+# file opened: bit.asm
+ 1    0000              ;; kill the bit
+ 2    0000              ;; adapted from https://altairclone.com/downloads/killbits.pdf
+ 3    0000
+ 4    0000                      org 0
+ 5    0000
+ 6    0000 00                   nop
+ 7    0001
+ 8    0001 21 00 00             ld hl, 0    ; initialize counter
+ 9    0004 16 80                ld d, $80   ; set up initial display bit
+10    0006 01 0E 00             ld bc, $0e  ; higher value = faster
+11    0009 7A           START:  ld a, d     ; display pattern on Orton 3C lights
+12    000A D3 00                out ($00),a
+13    000C D3 00                out ($00),a
+14    000E D3 00                out ($00),a
+15    0010 D3 00                out ($00),a
+16    0012 09                   add hl,bc   ; increment display counter
+17    0013 30 F4                jr nc, START
+18    0015 DB 00                in a, ($00) ; input data from input switches
+19    0017 AA                   xor d       ; exclusive or with A
+20    0018 0F                   rrca        ; rotate display right one bit
+21    0019 57                   ld d,a      ; move data to display reg
+22    001A 18 ED                jr START    ; repeat sequence
+23    001C
+# file closed: bit.asm
