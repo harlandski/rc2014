@@ -26,6 +26,11 @@ Assembly and BASIC Programs for the RC2014 family
 - It requires the I/O module
 - Obviously, the output doesn't make much sense above 255, but is a nice Blinkenlights routine
 - I originally wrote this code for a Soviet 8080 Microtrainer - see my [video](https://youtu.be/7Rhykm3Gkuc?si=Io27PC4c3WNNVdF-).
+### Kill the Bit
+- The original and best!
+- Translated with minimal effort from [the Altair 8800 version](https://altairclone.com/downloads/killbits.pdf)
+- As it says in the original, you've got to start with all input switches set to 0, and flick on and off quickly to catch the bit
+- No repsonsibility is taken for switches damaged in the playing of this game
 
 ## RC2014 Classic ][
 
